@@ -25,7 +25,10 @@ jobs:
           fetch-depth: 0
           ref: main
           token: ${{ env.GH_TOKEN }}
-        
+
+      - name: echo
+        run: echo "${{ github.sha }}" > README.md
+  
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
