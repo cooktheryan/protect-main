@@ -19,7 +19,6 @@ jobs:
         run: echo "testing" > README.md
         
       - name: Commit changes
-        if: github.event_name != 'pull_request' && steps.verify-changed-files.outputs.files_changed == 'true' 
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
