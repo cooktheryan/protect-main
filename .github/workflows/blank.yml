@@ -13,18 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔍 GH_TOKEN
-        if: env.GH_TOKEN == ''
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
-
       - name: 🤘 checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: main
-          token: ${{ env.GH_TOKEN }}
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
 
       - name: echo
         run: echo "${{ github.sha }}" > README.md
@@ -39,5 +33,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
           branch: ${{ github.head_ref }}
