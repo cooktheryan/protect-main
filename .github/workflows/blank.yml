@@ -24,4 +24,10 @@ jobs:
           git config --local user.name "GitHub Action"
           git add README.md
           git commit -m "chore: Updated coverage badge."
-          git push origin main
+
+      - name: Push changes
+        if: github.event_name != 'pull_request' && steps.verify-changed-files.outputs.files_changed == 'true' 
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref }}
